@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 @Transactional
 public interface ICategoryRepository extends JpaRepository<Category, Long> {
-    @Query(value = "select * from `position` ", nativeQuery = true)
+    @Query(value = "select * from `category` ", nativeQuery = true)
     List<Category> findAllCategory();
 
 }

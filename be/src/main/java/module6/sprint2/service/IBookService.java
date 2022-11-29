@@ -14,4 +14,9 @@ public interface IBookService {
     Optional<Book> finBookById(Long id);
 
     List<Book>findBookSameCategory(Long categoryId);
+
+    void deleteBookById(Long id);
+
+    Page<Book> findAllBookByCategoryId(Long categoryId, Pageable pageable);
+    Page<Book> searchBookName(String name, Pageable page);
 }

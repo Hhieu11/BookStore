@@ -1,6 +1,7 @@
 package module6.sprint2.controller;
 
 import module6.sprint2.entity.book.Book;
+import module6.sprint2.entity.book.Category;
 import module6.sprint2.service.IAuthorService;
 import module6.sprint2.service.IBookService;
 import module6.sprint2.service.ICategoryService;
@@ -33,7 +34,7 @@ public class BookController {
     @Autowired
     IPromotionService promotionService;
 
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER')")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("book-list")
     public ResponseEntity<Page<Book>> getAllBook(@PageableDefault(value = 8) Pageable pageable) {
         Page<Book> books = bookService.findAllBook(pageable);
@@ -60,5 +61,40 @@ public class BookController {
         return bookService.findBookSameCategory(categoryId);
     }
 
+    @GetMapping("")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Category> getAllCategory() {
+
+        return categoryService.findAllCategory();
+    }
+
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<Book> deleteBookId(@PathVariable Long id) {
+        Optional<Book>book = bookService.finBookById(id);
+        if (!book.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        bookService.deleteBookById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/category/{id}")
+    public ResponseEntity<Page<Book>> getAllBookByCategoryId(@PathVariable("id") Long categoryId, @PageableDefault(value = 8) Pageable pageable) {
+        Page<Book> books = bookService.findAllBookByCategoryId(categoryId, pageable);
+        if (books.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+
+    @GetMapping("/search/{name}")
+    public ResponseEntity<Page<Book>> searchBook(@PathVariable("name") String name,@PageableDefault(value = 4) Pageable pageable) {
+        Page<Book> books = bookService.searchBookName(name,pageable);
+
+        if (books.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
 
 }

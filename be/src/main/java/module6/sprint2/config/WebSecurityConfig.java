@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 ////                .antMatchers("/auth/login").permitAll()
 ////                .antMatchers(HttpHeaders.ALLOW).permitAll()
 //                .antMatchers("/api/account/**", "/api/customer/**", "/api/book/**", "/api/cart/**").hasAnyAuthority("ROLE_ADMIN")
-//                .antMatchers("/api/account/**", "/api/customer/**", "/api/book/book-customer/**", "/api/cart/**").hasAnyAuthority("ROLE_CUSTOMER")
+//                .antMatchers("/api/account/**", "/api/customer/**", "/api/book/**", "/api/cart/**").hasAnyAuthority("ROLE_USER")
 ////                .antMatchers("/api/customer/**", "/api/employee/**").hasAuthority("ROLE_SELL")
 //                .antMatchers("/**/*.js", "/**/*.css", "/**/*.jpg", "/**/*.png").permitAll()
 //                .and().authorizeRequests().antMatchers("/auth/login").permitAll()
@@ -59,6 +59,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 //        ;
 //        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
+        httpSecurity.authorizeRequests().antMatchers("/api/book/**").permitAll();
+
         httpSecurity.cors();
         httpSecurity.csrf().disable()
                 .authorizeRequests().antMatchers("/auth/login").permitAll()

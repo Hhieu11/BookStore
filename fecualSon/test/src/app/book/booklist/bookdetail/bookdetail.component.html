@@ -141,7 +141,7 @@
           <div class="col-md-3" *ngFor="let b of book1">
             <div class="item text-center border
                                     ">
-              <div class="item-img">
+              <div class="item-img"  [routerLink]="['/detail',b.bookId]">
                 <img class="img-fluid"
                      src="{{b.bookImage}}"
                      alt="">

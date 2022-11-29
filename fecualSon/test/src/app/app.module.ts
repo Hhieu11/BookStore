@@ -18,6 +18,7 @@ import { AccessDeniedComponent } from './security/access-denied/access-denied/ac
 import { LoginComponent } from './security/login-jwt/login.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { BookdetailComponent } from './book/booklist/bookdetail/bookdetail.component';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,14 @@ import { BookdetailComponent } from './book/booklist/bookdetail/bookdetail.compo
     ReactiveFormsModule,
     RouterModule,
     NgxPaginationModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      progressBar: true,
+      progressAnimation: 'decreasing',
+      timeOut: 2000,
+      extendedTimeOut: 1000
+    })
 
 
   ],

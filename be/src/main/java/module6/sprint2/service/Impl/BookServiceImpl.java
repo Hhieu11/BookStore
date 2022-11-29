@@ -37,5 +37,20 @@ public class BookServiceImpl implements IBookService {
         return bookRepository.findBookSameCategory(categoryId);
     }
 
+    @Override
+    public void deleteBookById(Long id) {
+        bookRepository.deleteBookById(id);
+    }
+
+    @Override
+    public Page<Book> findAllBookByCategoryId(Long categoryId, Pageable pageable) {
+        return bookRepository.findAllBookByCategoryId(categoryId,pageable);
+    }
+
+    @Override
+    public Page<Book> searchBookName(String name, Pageable page) {
+        return bookRepository.searchBookName(name,page);
+    }
+
 
 }

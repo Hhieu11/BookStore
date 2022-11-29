@@ -11,4 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface IAccountRepository extends JpaRepository<Account, Long> {
     @Query(value = "SELECT * FROM account WHERE username=?1", nativeQuery = true)
     Account findAccountByUsername(String username);
+
+    @Query(value = "SELECT * FROM account WHERE account_id=?1", nativeQuery = true)
+    Account findAccountById(Long id);
 }

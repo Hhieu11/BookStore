@@ -4,6 +4,7 @@ package module6.sprint2.entity.cart;
 import module6.sprint2.entity.account.Account;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import java.time.LocalDate;
 
 @Entity
@@ -12,7 +13,7 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartId;
-
+    @Null
     private String cartCode;
 
     private Integer cartQuantity;
@@ -30,14 +31,14 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(String cartCode, Integer cartQuantity, Double cartTotalMoney, LocalDate cartPurchaseDate, Boolean cartStatus, Account cartAccountId) {
-        this.cartCode = cartCode;
+    public Cart( Integer cartQuantity, Double cartTotalMoney, LocalDate cartPurchaseDate, Account cartAccountId) {
         this.cartQuantity = cartQuantity;
         this.cartTotalMoney = cartTotalMoney;
         this.cartPurchaseDate = cartPurchaseDate;
-        this.cartStatus = cartStatus;
         this.cartAccountId = cartAccountId;
     }
+
+
 
     public Cart(Long cartId, String cartCode, Integer cartQuantity, Double cartTotalMoney, LocalDate cartPurchaseDate, Boolean cartStatus, Account cartAccountId) {
         this.cartId = cartId;
